@@ -1,7 +1,10 @@
 #!/usr/bin/env ruby
 
+$:.unshift(File.expand_path(File.join(File.dirname(__FILE__), "../lib")))
+
 require "ostruct"
 require "optparse"
+require "engine"
 
 options = OpenStruct.new
 
@@ -32,3 +35,8 @@ parser.parse!(ARGV)
 if options[:github_token].nil? || options[:cc_token].nil?
   raise OptionParser::MissingArgument, "Use `--help` (`-h`) to see usage details"
 end
+
+Engine.new(
+  github_slug: github_slug,
+  options: options,
+).run
