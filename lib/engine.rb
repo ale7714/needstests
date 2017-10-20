@@ -81,6 +81,7 @@ class Engine
   end
 
   def test_file_report_for(constant_name)
+    return if test_report.nil?
     ::JSON.parse(
       RestClient.get(
         "#{CODECLIMATE_API_URL}/repos/#{repo["id"]}/test_reports/#{test_report["id"]}/test_file_reports",

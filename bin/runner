@@ -12,9 +12,6 @@ raise ArgumentError, "Missing repo GitHub slug" unless (github_slug = ARGV[0])
 
 parser = OptionParser.new do |opts|
   opts.banner = "Usage: runner REPO_GITHUB_SLUG [options]"
-  opts.on("--github-token GITHUB_TOKEN", String, "Specify a valid GitHub access token") do |github_token|
-    options.github_token = github_token
-  end
 
   opts.on("--codeclimate-token CODECLIMATE_TOKEN", String, "Specify a valid CodeClimate API token") do |cc_token|
     options.cc_token = cc_token
@@ -32,7 +29,7 @@ end
 
 parser.parse!(ARGV)
 
-if options[:github_token].nil? || options[:cc_token].nil?
+if options[:cc_token].nil?
   raise OptionParser::MissingArgument, "Use `--help` (`-h`) to see usage details"
 end
 
